@@ -7,4 +7,4 @@ The definitions have been manually skimmed over and the small subset of endpoint
 
 ## Generated OpenApi Definitions
 
-For Keycloak 16, 17 and 18 can be found under: [OpenApiDefinitions](`./OpenApiDefinitions`)
+For Keycloak 16, 17 and 18 can be found under: [OpenApiDefinitions](./OpenApiDefinitions)
