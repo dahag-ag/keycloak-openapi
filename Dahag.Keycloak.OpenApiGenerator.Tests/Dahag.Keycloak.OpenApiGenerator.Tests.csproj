@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="NUnit" Version="3.13.2" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+		<PackageReference Include="coverlet.collector" Version="3.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dahag.Keycloak.OpenApiGenerator\Dahag.Keycloak.OpenApiGenerator.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="TestFiles\AdvancedParamsResource.java" />
+	  <EmbeddedResource Include="TestFiles\ChildResource.java" />
+	  <EmbeddedResource Include="TestFiles\DifferentConsumeAndProduceTypesEndpointsResource.java" />
+	  <EmbeddedResource Include="TestFiles\DocumentedResource.java" />
+	  <EmbeddedResource Include="TestFiles\ImplicitPathResource.java" />
+	  <EmbeddedResource Include="TestFiles\ParentResource.java" />
+	  <EmbeddedResource Include="TestFiles\RepresentationWithIgnored.java" />
+	  <EmbeddedResource Include="TestFiles\RepresentationWithNestedType.java" />
+	  <EmbeddedResource Include="TestFiles\SimpleParamsResource.java" />
+	  <EmbeddedResource Include="TestFiles\SimpleRepresentation.java" />
+	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResource.java" />
+	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResourceShuffledAttributes.java" />
+	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResourceWithRandomPrivateMethods.java" />
+	  <None Remove="TestFiles\ClientsResource.java" />
+	  <EmbeddedResource Include="TestFiles\ClientsResource.java" />
+	  <None Remove="TestFiles\ClientResource.java" />
+	  <EmbeddedResource Include="TestFiles\ClientResource.java" />
+	  <None Remove="TestFiles\ClientRepresentation.java" />
+	  <EmbeddedResource Include="TestFiles\ClientRepresentation.java" />
+	  <None Remove="TestFiles\Logic.java" />
+	  <EmbeddedResource Include="TestFiles\Logic.java" />
+	</ItemGroup>
+
+</Project>
