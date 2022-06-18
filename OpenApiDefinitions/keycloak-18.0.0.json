@@ -2111,18 +2111,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nAdd client-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -2134,18 +2122,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nRemove client-level roles from the client's scope.\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -2323,18 +2299,6 @@
           "ScopeMapped"
         ],
         "description": "/\nAdd a set of realm-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -2346,18 +2310,6 @@
           "ScopeMapped"
         ],
         "description": "/\nRemove a set of realm-level roles from the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -2961,18 +2913,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nAdd client-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -2984,18 +2924,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nRemove client-level roles from the client's scope.\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -3173,18 +3101,6 @@
           "ScopeMapped"
         ],
         "description": "/\nAdd a set of realm-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -3196,18 +3112,6 @@
           "ScopeMapped"
         ],
         "description": "/\nRemove a set of realm-level roles from the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -5374,18 +5278,6 @@
           "RoleContainer"
         ],
         "description": "/\nAdd a composite to the role\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -5418,18 +5310,6 @@
           "RoleContainer"
         ],
         "description": "/\nRemove roles from the role's composite\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -5870,18 +5750,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nAdd client-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -5893,18 +5761,6 @@
           "ScopeMappedClient"
         ],
         "description": "/\nRemove client-level roles from the client's scope.\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -6079,18 +5935,6 @@
           "ScopeMapped"
         ],
         "description": "/\nAdd a set of realm-level roles to the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -6102,18 +5946,6 @@
           "ScopeMapped"
         ],
         "description": "/\nRemove a set of realm-level roles from the client's scope\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -7586,18 +7418,6 @@
           "ClientRoleMappings"
         ],
         "description": "/\nAdd client-level roles to the user role mapping\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -7609,18 +7429,6 @@
           "ClientRoleMappings"
         ],
         "description": "/\nDelete client-level roles from user role mapping\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -7795,18 +7603,6 @@
           "RoleMapper"
         ],
         "description": "/\nAdd realm-level role mappings to the user\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -7818,18 +7614,6 @@
           "RoleMapper"
         ],
         "description": "/\nDelete realm-level role mappings\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -9066,18 +8850,6 @@
           "RoleById"
         ],
         "description": "/\nMake the role a composite role by associating some child roles\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -9135,18 +8907,6 @@
           "RoleById"
         ],
         "description": "/\nRemove a set of roles from the role's composite\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -9418,18 +9178,6 @@
           "RoleContainer"
         ],
         "description": "/\nAdd a composite to the role\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -9462,18 +9210,6 @@
           "RoleContainer"
         ],
         "description": "/\nRemove roles from the role's composite\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -11437,18 +11173,6 @@
           "ClientRoleMappings"
         ],
         "description": "/\nAdd client-level roles to the user role mapping\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -11460,18 +11184,6 @@
           "ClientRoleMappings"
         ],
         "description": "/\nDelete client-level roles from user role mapping\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -11646,18 +11358,6 @@
           "RoleMapper"
         ],
         "description": "/\nAdd realm-level role mappings to the user\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
@@ -11669,18 +11369,6 @@
           "RoleMapper"
         ],
         "description": "/\nDelete realm-level role mappings\n\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RoleRepresentation"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "2XX": {
             "description": "Success"
