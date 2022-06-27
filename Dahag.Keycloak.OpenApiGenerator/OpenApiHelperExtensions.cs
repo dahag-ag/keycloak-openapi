@@ -159,11 +159,18 @@ public static class OpenApiHelperExtensions
 
 	public static OpenApiSchema ToOpenApiSchema(this IRepresentation representation)
 	{
+		
 		return new OpenApiSchema
 		{
 			Type = "object",
-			Properties = representation.Properties.ToDictionary(property => property.Name, property => property.Type.ToOpenApiSchema())
+			Properties = representation.Properties.ToDictionary(ToLowerPascalCase, property => property.Type.ToOpenApiSchema())
 		};
+	}
+
+	private static string ToLowerPascalCase(Property property)
+	{
+		var name = char.ToLower(property.Name[0]) + property.Name[1..];
+		return name;
 	}
 
 	public static OpenApiSchema ToOpenApiSchema(this TypeInfo typeInfo)
