@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics;
 using Dahag.Keycloak.OpenApiGenerator.Parsing.Resource;
 
 namespace Dahag.Keycloak.OpenApiGenerator.PostProcess;
@@ -35,7 +36,7 @@ public class ParentActionCollection : IActionCollection
 		List<IRepresentation> representations, List<KeycloakEnum> enums)
 	{
 		var parentActions = rawRxJsResource.Actions.Where(x => x.ProbablyParentOfAnotherResource)
-			.Where(x => !IgnoreHelper.IgnoredActionParentReturnTypes.Contains(x.ReturnsType)).ToList();
+			.Where(resourceAction => !IgnoreHelper.DisregardAsParentActionFuncs.Any(checkFunc => checkFunc(resourceAction))).ToList();
 
 		var convertedParentedActions = new List<(IAction BaseAction, IActionCollection ChildCollection)>();
 

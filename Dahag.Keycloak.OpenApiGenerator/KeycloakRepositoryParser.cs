@@ -157,8 +157,9 @@ public static class IgnoreHelper
 		"ClaimValue"
 	};
 
-	public static readonly string[] IgnoredActionParentReturnTypes =
+	public static readonly Func<RawRxJsResourceAction, bool>[] DisregardAsParentActionFuncs =
 	{
-		"AuthorizationService"
+		action => action.ReturnsType == "AuthorizationService",
+		action => action.Tag == "RealmAdminResource" && action.ReturnsType == "Object",
 	};
 }
