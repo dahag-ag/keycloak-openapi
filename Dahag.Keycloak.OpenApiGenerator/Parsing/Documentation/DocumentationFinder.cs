@@ -12,7 +12,7 @@ public class DocumentationFinder
 	{
 		var matches = _commentBlockRegex.Matches(fullTextContext);
 
-		var estimatedCommentRange = new Range(rawRxJsResourceAction.PersistedAtLine - 8, rawRxJsResourceAction.PersistedAtLine - 2);
+		var estimatedCommentRange = new Range(rawRxJsResourceAction.FoundAtLine - 3, rawRxJsResourceAction.FoundAtLine + 2);
 		var commentBlockInRange = matches.SingleOrDefault(x => x.Range(fullTextContext).DoIntersect(estimatedCommentRange));
 
 		if (commentBlockInRange == null)

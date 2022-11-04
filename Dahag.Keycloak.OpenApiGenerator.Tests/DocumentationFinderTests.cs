@@ -18,7 +18,7 @@ public class DocumentationFinderTests
 	}
 
 	[Test]
-	public void FindComments_ThreeDocumentedBlocks_Works()
+	public void FindComments_FiveDocumentedBlocks_Works()
 	{
 		const string testFile = "Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.DocumentedResource.java";
 		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream(testFile);
@@ -33,12 +33,12 @@ public class DocumentationFinderTests
 		var resource = interpreter.Visit(parser.compilationUnit());
 
 		Assert.That(resource, Is.Not.Null);
-		Assert.That(resource.Actions, Has.Count.EqualTo(4));
+		Assert.That(resource.Actions, Has.Count.EqualTo(5));
 
 		var documentationFinder = new DocumentationFinder();
 		var documentations = resource.Actions.Select(x => documentationFinder.Find(x, fullTestFileText)).Where(x => x != null).ToList(); 
 		
-		Assert.That(documentations, Has.Count.EqualTo(4));
+		Assert.That(documentations, Has.Count.EqualTo(5));
 		Assert.That(documentations[0]!.Text, Contains.Substring("Returns a list of user sessions associated with this client"));
 		Assert.That(documentations[0]!.ParamText, Has.Count.EqualTo(3));
 		Assert.That(documentations[1]!.Text, Contains.Substring("Get user sessions for clientB"));
@@ -46,6 +46,7 @@ public class DocumentationFinderTests
 		Assert.That(documentations[2]!.Text, Contains.Substring("Get user sessions for clientC"));
 		Assert.That(documentations[2]!.ParamText, Has.Count.EqualTo(3));
 		Assert.That(documentations[3]!.Text, Contains.Substring("Get user sessions for clientD"));
+		Assert.That(documentations[4]!.Text, Contains.Substring("Get user sessions for clientE"));
 	}
 
 	public static JavaParser CreateJavaParser(TextReader input)

@@ -43,6 +43,7 @@ public class RawRxJsResourceAction
 		}
 	}
 
+	public int FoundAtLine { get; set; }
 	public int PersistedAtLine { get; set; }
 	public bool ProbablyParentOfAnotherResource { get; set; }
 	public string? Tag { get; set; }

@@ -192,7 +192,7 @@ public class ClientResource {
     }
 
             
-    /**
+     /**
      * Get user sessions for clientD
      *
      * Returns a list of user sessions associated with this client
@@ -208,5 +208,29 @@ public class ClientResource {
         maxResults = maxResults != null ? maxResults : Constants.DEFAULT_MAX_RESULTS;
         return session.sessions().getUserSessionsStream(client.getRealm(), client, firstResult, maxResults)
                 .map(ModelToRepresentation::toRepresentation);
+    }
+    
+    /**
+     * Get user sessions for clientE
+     *
+     * Returns a list of user sessions associated with this client
+     *
+     */
+    @GET
+    @NoCache
+    @Produces(MediaType.APPLICATION_JSON)
+    public Stream<GroupRepresentation> ugaBugaE(@QueryParam("search") String search,
+                                                 @QueryParam("first") Integer firstResult,
+                                                 @QueryParam("max") Integer maxResults,
+                                                 @QueryParam("briefRepresentation") @DefaultValue("true") boolean briefRepresentation) {
+        auth.groups().requireList();
+
+        if (Objects.nonNull(search)) {
+            return ModelToRepresentation.searchForGroupByName(realm, !briefRepresentation, search.trim(), firstResult, maxResults);
+        } else if(Objects.nonNull(firstResult) && Objects.nonNull(maxResults)) {
+            return ModelToRepresentation.toGroupHierarchy(realm, !briefRepresentation, firstResult, maxResults);
+        } else {
+            return ModelToRepresentation.toGroupHierarchy(realm, !briefRepresentation);
+        }
     }
 }

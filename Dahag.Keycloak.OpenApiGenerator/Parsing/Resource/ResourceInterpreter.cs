@@ -20,7 +20,8 @@ public class ResourceInterpreter : JavaParserBaseVisitor<RawRxJsResource>
 	{
 		CurrentPending ??= new RawRxJsResourceAction()
 		{
-			Tag = _resource.Name
+			Tag = _resource.Name,
+			FoundAtLine = context.Start.Line
 		};
 
 		var actionAnnotation = new ActionAnnotationInterpreter().VisitAnnotation(context);
