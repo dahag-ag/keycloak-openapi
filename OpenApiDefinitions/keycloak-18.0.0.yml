@@ -79,49 +79,59 @@ paths:
     get:
       tags:
         - RealmAdmin
-      description: "/\nBase path for the admin REST API for one particular realm.\n\n"
+      description: "/\nGet admin events\n\nReturns all admin events, or filters events based on URL query parameters listed here\n\n"
       parameters:
         - name: operationTypes
           in: query
+          description: ''
           schema:
             type: array
             items:
               type: string
         - name: authRealm
           in: query
+          description: ''
           schema:
             type: string
         - name: authClient
           in: query
+          description: ''
           schema:
             type: string
         - name: authUser
           in: query
+          description: user id
           schema:
             type: string
         - name: authIpAddress
           in: query
+          description: ''
           schema:
             type: string
         - name: resourcePath
           in: query
+          description: ''
           schema:
             type: string
         - name: dateFrom
           in: query
+          description: ''
           schema:
             type: string
         - name: dateTo
           in: query
+          description: ''
           schema:
             type: string
         - name: first
           in: query
+          description: ''
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: Maximum results size (defaults to 100)
           schema:
             type: integer
             format: int32
@@ -2145,18 +2155,21 @@ paths:
     get:
       tags:
         - Clients
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nGet clients belonging to the realm.\n\nIf a client can't be retrieved from the storage due to a problem with the underlying storage,\nit is silently removed from the returned list.\nThis ensures that concurrent modifications to the list don't prevent callers from retrieving this list.\n\n"
       parameters:
         - name: clientId
           in: query
+          description: filter by clientId
           schema:
             type: string
         - name: viewableOnly
           in: query
+          description: filter clients that cannot be viewed in full by admin
           schema:
             type: boolean
         - name: search
           in: query
+          description: whether this is a search query or a getClientById query
           schema:
             type: boolean
         - name: q
@@ -2165,11 +2178,13 @@ paths:
             type: string
         - name: first
           in: query
+          description: the first result
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: the max results to return
           schema:
             type: integer
             format: int32
@@ -2301,6 +2316,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2326,11 +2342,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2362,11 +2380,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2392,11 +2412,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2428,11 +2450,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2463,11 +2487,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2498,11 +2524,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: attr
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -2539,6 +2567,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2571,6 +2600,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2598,6 +2628,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2606,14 +2637,14 @@ paths:
     put:
       tags:
         - Client
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nBase path for managing a specific client.\n\n"
       responses:
         2XX:
           description: Success
     delete:
       tags:
         - Client
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nBase path for managing a specific client.\n\n"
       responses:
         2XX:
           description: Success
@@ -2626,6 +2657,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2665,6 +2697,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2699,6 +2732,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2735,6 +2769,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2767,6 +2802,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2779,6 +2815,7 @@ paths:
       parameters:
         - name: scope
           in: query
+          description: ''
           schema:
             type: string
       responses:
@@ -2799,11 +2836,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: roleContainerId
         in: path
+        description: either realm name OR client UUID
         required: true
         schema:
           type: string
@@ -2816,6 +2855,7 @@ paths:
       parameters:
         - name: scope
           in: query
+          description: ''
           schema:
             type: string
       responses:
@@ -2836,11 +2876,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: roleContainerId
         in: path
+        description: either realm name OR client UUID
         required: true
         schema:
           type: string
@@ -2849,7 +2891,7 @@ paths:
     get:
       tags:
         - Client
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nBase path for managing a specific client.\n\n"
       responses:
         2XX:
           description: Success
@@ -2862,6 +2904,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2908,6 +2951,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2936,6 +2980,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2957,6 +3002,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -2991,6 +3037,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3031,6 +3078,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3058,6 +3106,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3066,14 +3115,14 @@ paths:
     put:
       tags:
         - Client
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nBase path for managing a specific client.\n\n"
       responses:
         2XX:
           description: Success
     delete:
       tags:
         - Client
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nBase path for managing a specific client.\n\n"
       responses:
         2XX:
           description: Success
@@ -3086,6 +3135,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3119,6 +3169,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3158,6 +3209,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3185,6 +3237,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3217,6 +3270,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3242,6 +3296,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3300,6 +3355,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3344,6 +3400,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3405,6 +3462,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3438,6 +3496,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3477,6 +3536,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3491,20 +3551,23 @@ paths:
     get:
       tags:
         - RoleContainer
-      description: "/\nBase path for managing clients under this realm.\n\n"
+      description: "/\nReturns a stream of groups that have the specified role name\n\n\n"
       parameters:
         - name: first
           in: query
+          description: 'first result to return. Ignored if negative or {@code null}.'
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: 'maximum number of results to return. Ignored if negative or {@code null}.'
           schema:
             type: integer
             format: int32
         - name: briefRepresentation
           in: query
+          description: 'if false, return a full representation of the {@code GroupRepresentation} objects.'
           schema:
             type: boolean
       responses:
@@ -3525,11 +3588,13 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
       - name: role-name
         in: path
+        description: the role name.
         required: true
         schema:
           type: string
@@ -3571,6 +3636,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3617,6 +3683,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3648,6 +3715,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3703,6 +3771,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3735,6 +3804,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3773,6 +3843,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3833,6 +3904,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3860,6 +3932,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3893,6 +3966,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3918,6 +3992,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3946,6 +4021,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -3972,6 +4048,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -4012,6 +4089,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -4056,6 +4134,7 @@ paths:
           type: string
       - name: id1
         in: path
+        description: id of client (not client-id)
         required: true
         schema:
           type: string
@@ -4367,41 +4446,49 @@ paths:
     get:
       tags:
         - RealmAdmin
-      description: "/\nBase path for the admin REST API for one particular realm.\n\n"
+      description: "/\nGet events\n\nReturns all events, or filters them based on URL query parameters listed here\n\n"
       parameters:
         - name: type
           in: query
+          description: The types of events to return
           schema:
             type: array
             items:
               type: string
         - name: client
           in: query
+          description: App or oauth client name
           schema:
             type: string
         - name: user
           in: query
+          description: User id
           schema:
             type: string
         - name: dateFrom
           in: query
+          description: From date
           schema:
             type: string
         - name: dateTo
           in: query
+          description: To date
           schema:
             type: string
         - name: ipAddress
           in: query
+          description: IP address
           schema:
             type: string
         - name: first
           in: query
+          description: Paging offset
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: Maximum results size (defaults to 100)
           schema:
             type: integer
             format: int32
@@ -4566,7 +4653,7 @@ paths:
     delete:
       tags:
         - Group
-      description: "/\nBase path for the admin REST API for one particular realm.\n\n"
+      description: "/\nDoes not expand hierarchy.  Subgroups will not be set.\n\n"
       responses:
         2XX:
           description: Success
@@ -4579,6 +4666,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4605,6 +4693,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4646,6 +4735,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4691,6 +4781,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4716,6 +4807,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4771,6 +4863,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4803,6 +4896,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4841,6 +4935,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4901,6 +4996,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4928,6 +5024,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -4961,6 +5058,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: ''
         required: true
         schema:
           type: string
@@ -5671,7 +5769,7 @@ paths:
     get:
       tags:
         - RoleById
-      description: "/\nPath for managing all realm-level or client-level roles defined in this realm by its id.\n\n"
+      description: "/\nGet role's children\n\nReturns a set of role's children provided the role is a composite.\n\n"
       parameters:
         - name: search
           in: query
@@ -5995,20 +6093,23 @@ paths:
     get:
       tags:
         - RoleContainer
-      description: "/\nbase path for managing realm-level roles of this realm\n\n"
+      description: "/\nReturns a stream of groups that have the specified role name\n\n\n"
       parameters:
         - name: first
           in: query
+          description: 'first result to return. Ignored if negative or {@code null}.'
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: 'maximum number of results to return. Ignored if negative or {@code null}.'
           schema:
             type: integer
             format: int32
         - name: briefRepresentation
           in: query
+          description: 'if false, return a full representation of the {@code GroupRepresentation} objects.'
           schema:
             type: boolean
       responses:
@@ -6029,6 +6130,7 @@ paths:
           type: string
       - name: role-name
         in: path
+        description: the role name.
         required: true
         schema:
           type: string
@@ -6142,7 +6244,7 @@ paths:
     post:
       tags:
         - RealmAdmin
-      description: "/\nBase path for the admin REST API for one particular realm.\n\n"
+      description: "/\nTest LDAP connection\n\n"
       responses:
         2XX:
           description: Success
@@ -6325,64 +6427,78 @@ paths:
     get:
       tags:
         - Users
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet users\n\nReturns a stream of users, filtered according to query parameters.\n\n"
       parameters:
         - name: search
           in: query
+          description: 'A String contained in username, first or last name, or email'
           schema:
             type: string
         - name: lastName
           in: query
+          description: 'A String contained in lastName, or the complete lastName, if param "exact" is true'
           schema:
             type: string
         - name: firstName
           in: query
+          description: 'A String contained in firstName, or the complete firstName, if param "exact" is true'
           schema:
             type: string
         - name: email
           in: query
+          description: 'A String contained in email, or the complete email, if param "exact" is true'
           schema:
             type: string
         - name: username
           in: query
+          description: 'A String contained in username, or the complete username, if param "exact" is true'
           schema:
             type: string
         - name: emailVerified
           in: query
+          description: whether the email has been verified
           schema:
             type: boolean
         - name: idpAlias
           in: query
+          description: The alias of an Identity Provider linked to the user
           schema:
             type: string
         - name: idpUserId
           in: query
+          description: The userId at an Identity Provider linked to the user
           schema:
             type: string
         - name: first
           in: query
+          description: Pagination offset
           schema:
             type: integer
             format: int32
         - name: max
           in: query
+          description: Maximum results size (defaults to 100)
           schema:
             type: integer
             format: int32
         - name: enabled
           in: query
+          description: Boolean representing if user is enabled or not
           schema:
             type: boolean
         - name: briefRepresentation
           in: query
+          description: 'Boolean which defines whether brief representations are returned (default: false)'
           schema:
             type: boolean
         - name: exact
           in: query
+          description: 'Boolean which defines whether the params "last", "first", "email" and "username" must match exactly'
           schema:
             type: boolean
         - name: q
           in: query
+          description: 'A query to search for custom attributes, in the format ''key1:value2 key2:value2'''
           schema:
             type: string
       responses:
@@ -6478,6 +6594,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6505,6 +6622,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6534,6 +6652,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6555,6 +6674,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6569,7 +6689,7 @@ paths:
     get:
       tags:
         - User
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       responses:
         2XX:
           description: Success
@@ -6588,6 +6708,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6609,6 +6730,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6635,6 +6757,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6668,6 +6791,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6700,6 +6824,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6733,6 +6858,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6778,6 +6904,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6805,6 +6932,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6838,6 +6966,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6852,7 +6981,7 @@ paths:
     get:
       tags:
         - User
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       parameters:
         - name: search
           in: query
@@ -6890,6 +7019,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6898,14 +7028,14 @@ paths:
     delete:
       tags:
         - User
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       responses:
         2XX:
           description: Success
     put:
       tags:
         - User
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       responses:
         2XX:
           description: Success
@@ -6918,6 +7048,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6931,7 +7062,7 @@ paths:
     get:
       tags:
         - User
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       parameters:
         - name: search
           in: query
@@ -6956,6 +7087,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -6983,6 +7115,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7004,6 +7137,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7031,6 +7165,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7062,6 +7197,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7094,6 +7230,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7119,6 +7256,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7174,6 +7312,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7206,6 +7345,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7244,6 +7384,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7304,6 +7445,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7331,6 +7473,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7364,6 +7507,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7396,6 +7540,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7423,6 +7568,7 @@ paths:
           type: string
       - name: id
         in: path
+        description: User id
         required: true
         schema:
           type: string
@@ -7431,22 +7577,26 @@ paths:
     get:
       tags:
         - Users
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nReturns the number of users that match the given criteria.\nIt can be called in three different ways.\n1. Don't specify any criteria and pass {"
       parameters:
         - name: search
           in: query
+          description: arbitrary search string for all the fields below
           schema:
             type: string
         - name: lastName
           in: query
+          description: last name filter
           schema:
             type: string
         - name: firstName
           in: query
+          description: first name filter
           schema:
             type: string
         - name: email
           in: query
+          description: email filter
           schema:
             type: string
         - name: emailVerified
@@ -7455,10 +7605,12 @@ paths:
             type: boolean
         - name: username
           in: query
+          description: username filter
           schema:
             type: string
         - name: enabled
           in: query
+          description: Boolean representing if user is enabled or not
           schema:
             type: boolean
       responses:
@@ -7481,7 +7633,7 @@ paths:
     get:
       tags:
         - UserProfile
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       responses:
         2XX:
           description: Success
@@ -7492,7 +7644,7 @@ paths:
     put:
       tags:
         - UserProfile
-      description: "/\nBase path for managing users in this realm.\n\n"
+      description: "/\nGet representation of the user\n\n"
       requestBody:
         content:
           application/json:
