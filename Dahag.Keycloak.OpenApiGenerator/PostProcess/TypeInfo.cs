@@ -62,7 +62,7 @@ public class TypeInfo
 			"boolean" or "Boolean" => PostProcess.Primitive.Boolean,
 			"long" => PostProcess.Primitive.Long,
 			"Long" => PostProcess.Primitive.Long,
-			"Object" or "MultipartFormDataInput" => PostProcess.Primitive.Object,
+			"Object" or "MultipartFormDataInput" or "InputStream" => PostProcess.Primitive.Object,
 			"void" => PostProcess.Primitive.Void,
 			"Response" => PostProcess.Primitive.Response,
 			"byte" => PostProcess.Primitive.Byte,

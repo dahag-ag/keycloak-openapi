@@ -10,7 +10,7 @@ public static class RawRxJsResourceAssertExtensions {
 	
 	public static void AssertEquality(this IEnumerable<RawRxJsResourceAction> actual, IEnumerable<RawRxJsResourceAction> expected)
 	{
-		Assert.That(actual.Count(), Is.EqualTo(expected.Count()));
+		Assert.That(actual.Count(), Is.EqualTo(expected.Count()), "Mismatch in action count");
 		var together = actual.Zip(expected);
 
 		foreach (var tuple in together)
@@ -26,7 +26,7 @@ public static class RawRxJsResourceAssertExtensions {
 	
 	public static void AssertEquality(this IEnumerable<RawRxjsParam> actual, IEnumerable<RawRxjsParam> expected)
 	{
-		Assert.That(actual.Count(), Is.EqualTo(expected.Count()));
+		Assert.That(actual.Count(), Is.EqualTo(expected.Count()), "Mistmatch in param count");
 		var together = actual.Zip(expected);
 
 		foreach (var tuple in together)

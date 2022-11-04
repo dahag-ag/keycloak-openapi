@@ -27,6 +27,8 @@
 	  <EmbeddedResource Include="TestFiles\ParentResource.java" />
 	  <EmbeddedResource Include="TestFiles\RepresentationWithIgnored.java" />
 	  <EmbeddedResource Include="TestFiles\RepresentationWithNestedType.java" />
+	  <EmbeddedResource Include="TestFiles\ResourceWithInlineClassCreationAndMethods.java" />
+	  <EmbeddedResource Include="TestFiles\ResourceWithoutInlineClassCreationAndMethods.java" />
 	  <EmbeddedResource Include="TestFiles\SimpleParamsResource.java" />
 	  <EmbeddedResource Include="TestFiles\SimpleRepresentation.java" />
 	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResource.java" />
@@ -40,6 +42,10 @@
 	  <EmbeddedResource Include="TestFiles\ClientRepresentation.java" />
 	  <None Remove="TestFiles\Logic.java" />
 	  <EmbeddedResource Include="TestFiles\Logic.java" />
+	  <None Remove="TestFiles\ResourceWithInlineClassCreation.java" />
+	  <EmbeddedResource Include="TestFiles\ResourceWithInlineClassCreation.java" />
+	  <None Remove="TestFiles\ResourceWithoutInlineClassCreation.java" />
+	  <EmbeddedResource Include="TestFiles\ResourceWithoutInlineClassCreation.java" />
 	</ItemGroup>
 
 </Project>

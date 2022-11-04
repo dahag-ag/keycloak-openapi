@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Antlr4.Runtime.Tree;
 
 namespace Dahag.Keycloak.OpenApiGenerator.Parsing.Resource;
 
@@ -13,7 +14,8 @@ public class ResourceInterpreter : JavaParserBaseVisitor<RawRxJsResource>
 {
 	private readonly RawRxJsResource _resource = new();
 	public RawRxJsResourceAction? CurrentPending { get; private set; }
-
+	private bool _skipChildren = false;
+	
 	public override RawRxJsResource VisitAnnotation(JavaParser.AnnotationContext context)
 	{
 		CurrentPending ??= new RawRxJsResourceAction()
@@ -90,13 +92,17 @@ public class ResourceInterpreter : JavaParserBaseVisitor<RawRxJsResource>
 
 	public override RawRxJsResource VisitMethodBody(JavaParser.MethodBodyContext context)
 	{
-		if (CurrentPending == null)
-			return base.VisitMethodBody(context);
-
-		CurrentPending.PersistedAtLine = context.Start.Line;
-		_resource.Actions.Add(CurrentPending);
-		CurrentPending = null;
-		return base.VisitMethodBody(context);
+		_skipChildren = true;
+		if (CurrentPending != null)
+		{
+			CurrentPending.PersistedAtLine = context.Start.Line;
+			_resource.Actions.Add(CurrentPending);
+			CurrentPending = null;
+		}
+		
+		var result = base.VisitMethodBody(context);
+		_skipChildren = false;
+		return result;
 	}
 
 	public override RawRxJsResource VisitCompilationUnit(JavaParser.CompilationUnitContext context)
@@ -109,5 +115,15 @@ public class ResourceInterpreter : JavaParserBaseVisitor<RawRxJsResource>
 	{
 		base.VisitClassBody(context);
 		return _resource;
+	}
+
+	protected override bool ShouldVisitNextChild(IRuleNode node, RawRxJsResource currentResult)
+	{
+		if (_skipChildren)
+		{
+			return false;
+		}
+		
+		return base.ShouldVisitNextChild(node, currentResult);
 	}
 }

@@ -15,17 +15,12 @@ public class Tests
 	}
 
 	[Test]
-	[TestCase("TwoSimpleEndpointsResource")]
-	[TestCase("TwoSimpleEndpointsResourceShuffledAttributes")]
-	[TestCase("TwoSimpleEndpointsResourceWithRandomPrivateMethods")]
+	[TestCase("TwoSimpleEndpointsResource.java")]
+	[TestCase("TwoSimpleEndpointsResourceShuffledAttributes.java")]
+	[TestCase("TwoSimpleEndpointsResourceWithRandomPrivateMethods.java")]
 	public void Interpret_TwoSimpleEndpoints_TwoResources(string testFile)
 	{
-		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.{testFile}.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
-
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
+		var actual = ParseResource(testFile);
 
 		var expected = new List<RawRxJsResourceAction>
 		{
@@ -52,16 +47,8 @@ public class Tests
 	[Test]
 	public void Interpret_DifferentConsumeAndProduceTypes_Correct()
 	{
-		using var manifestResourceStream =
-			typeof(Tests).Assembly.GetManifestResourceStream(
-				$"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.DifferentConsumeAndProduceTypesEndpointsResource.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
+		var actual = ParseResource("DifferentConsumeAndProduceTypesEndpointsResource.java");
 
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
-
-		Assert.That(actual, Is.Not.Null);
 		Assert.That(actual.Actions, Has.Count.EqualTo(3));
 		Assert.That(actual.Actions[0].ProbablyParentOfAnotherResource, Is.False);
 		Assert.That(actual.Actions[0].Produces, Is.EquivalentTo(new List<MediaType>
@@ -89,44 +76,31 @@ public class Tests
 	[Test]
 	public void Interpret_ImplicitPath_DetectsPath()
 	{
-		using var manifestResourceStream =
-			typeof(Tests).Assembly.GetManifestResourceStream("Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.ImplicitPathResource.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
-
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
+		var actual = ParseResource("ImplicitPathResource.java");
 
 		var expected = new List<RawRxJsResourceAction>
 		{
 			new()
 			{
-				Path = "clients",
+				Path = null,
+				ImplicitPath = "clients",
 				HttpMethod = HttpMethod.Get,
 				ReturnsType = "Stream<ClientRepresentation>"
 			}
 		};
 
-		Assert.That(actual, Is.Not.Null);
 		Assert.That(actual.Actions, Has.Count.EqualTo(1));
 		actual.Actions.AssertEquality(expected);
 	}
-	
+
 	[Test]
 	public void Interpret_Parent_Works()
 	{
-		using var manifestResourceStream =
-			typeof(Tests).Assembly.GetManifestResourceStream("Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.ParentResource.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
+		var actual = ParseResource("ParentResource.java");
 
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
-
-		Assert.That(actual, Is.Not.Null);
 		Assert.That(actual.Actions, Has.Count.EqualTo(1));
 		Assert.That(actual.Actions[0].Path, Is.EqualTo("{id}"));
-		Assert.That(actual.Actions[0].HttpMethod, Is.EqualTo(HttpMethod.Get));
+		Assert.That(actual.Actions[0].HttpMethod, Is.EqualTo(HttpMethod.NoneFound));
 		Assert.That(actual.Actions[0].ReturnsType, Is.EqualTo("ClientResource"));
 		Assert.That(actual.Actions[0].ProbablyParentOfAnotherResource, Is.EqualTo(true));
 	}
@@ -134,16 +108,8 @@ public class Tests
 	[Test]
 	public void Interpret_Params_Works()
 	{
-		using var manifestResourceStream =
-			typeof(Tests).Assembly.GetManifestResourceStream("Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.SimpleParamsResource.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
+		var actual = ParseResource("SimpleParamsResource.java");
 
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
-
-
-		Assert.That(actual, Is.Not.Null);
 		Assert.That(actual.Actions, Has.Count.EqualTo(2));
 		actual.Actions[0].Parameters.AssertEquality(new List<RawRxjsParam>
 		{
@@ -191,16 +157,8 @@ public class Tests
 	[Test]
 	public void Interpret_AdvancedParams_Works()
 	{
-		using var manifestResourceStream =
-			typeof(Tests).Assembly.GetManifestResourceStream("Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.AdvancedParamsResource.java");
-		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
-		var parser = CreateJavaParser(textReader);
+		var actual = ParseResource("AdvancedParamsResource.java");
 
-		var interpreter = new ResourceInterpreter();
-		var actual = interpreter.Visit(parser.compilationUnit());
-
-
-		Assert.That(actual, Is.Not.Null);
 		Assert.That(actual.Actions, Has.Count.EqualTo(1));
 		actual.Actions[0].Parameters.AssertEquality(new List<RawRxjsParam>
 		{
@@ -231,7 +189,88 @@ public class Tests
 		});
 	}
 
-	public static JavaParser CreateJavaParser(TextReader input)
+
+	[Test]
+	public void Interpret_InlineClassCreationInMethodBody_CorrectParams()
+	{
+		var actual = ParseResource("ResourceWithInlineClassCreationAndMethods.java");
+
+		Assert.That(actual.Actions, Has.Count.EqualTo(3));
+		actual.Actions[0].AssertEquality(new RawRxJsResourceAction
+		{
+			Path = "partialImport",
+			HttpMethod = HttpMethod.Post,
+			Consumes = new List<MediaType> { MediaType.ApplicationJson },
+			ReturnsType = "Response",
+			Parameters = new List<RawRxjsParam>()
+			{
+				new()
+				{
+					Name = "rep",
+					Type = "PartialImportRepresentation",
+					ParamSource = ParamSource.Body
+				}
+			}
+		});
+		actual.Actions[1].AssertEquality(new RawRxJsResourceAction
+		{
+			Path = "partial-export",
+			HttpMethod = HttpMethod.Post,
+			Consumes = new List<MediaType> { MediaType.ApplicationJson },
+			ReturnsType = "RealmRepresentation",
+			Parameters = new List<RawRxjsParam>()
+			{
+				new ()
+				{
+					Name = "exportGroupsAndRoles",
+					ParamSource = ParamSource.Query,
+					PathParam = "exportGroupsAndRoles",
+					Type = "Boolean"
+				},
+				new ()
+				{
+					Name = "exportClients",
+					ParamSource = ParamSource.Query,
+					PathParam = "exportClients",
+					Type = "Boolean"
+				}
+			}
+		});
+		actual.Actions[2].AssertEquality(new RawRxJsResourceAction
+		{
+			Path = "keys",
+			HttpMethod = HttpMethod.NoneFound,
+			Consumes = new List<MediaType>(),
+			ReturnsType = "KeyResource"
+		});
+	}
+
+	[Test]
+	[TestCase("ResourceWithoutInlineClassCreation.java", "ResourceWithInlineClassCreation.java")]
+	[TestCase("ResourceWithoutInlineClassCreationAndMethods.java", "ResourceWithInlineClassCreationAndMethods.java")]
+	public void Interpret_InlineClassCreationVsNonInlineClassCreation_SameResult(string without, string with)
+	{
+		var expected = ParseResource(without);
+		var actual = ParseResource(with);
+
+		actual.Actions.AssertEquality(expected.Actions);
+	}
+
+	private static RawRxJsResource ParseResource(string testFileName)
+	{
+		using var manifestResourceStream =
+			typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.{testFileName}");
+		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
+		var parser = CreateJavaParser(textReader);
+		var interpreter = new ResourceInterpreter();
+		var rawRxJsResource = interpreter.Visit(parser.compilationUnit());
+
+		Assert.That(rawRxJsResource, Is.Not.Null);
+
+		return rawRxJsResource;
+	}
+
+	private static JavaParser CreateJavaParser(TextReader input)
 	{
 		var antlrInputStream = new AntlrInputStream(input);
 		var javaLexer = new JavaLexer(antlrInputStream);

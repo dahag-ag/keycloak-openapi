@@ -80,7 +80,8 @@ public class RawRxJsResourceAction
 	public override string ToString()
 	{
 		var paramsAsString = string.Join('\n', Parameters.Select(x => x.ToString()));
-		return $"{HttpMethod}_{Path} -> {ReturnsType} \n {paramsAsString}";
+		var path = Path ?? (ImplicitPath != null ? ($"~{ImplicitPath}~") : null);
+		return $"{HttpMethod}_{path} -> {ReturnsType} \n {paramsAsString}";
 	}
 }
 
