@@ -28,6 +28,10 @@ try
 		if (!Directory.Exists(outputRoot))
 			throw new Exception($"output root directory '{outputRoot}' could not be found");
 		
+		var outputFileName = options.OutputFileName ?? "definition";
+		var definitionsYmlPath = Path.Combine(outputRoot, $"{outputFileName}.yml");
+		var definitionsJsonPath = Path.Combine(outputRoot, $"{outputFileName}.json");
+
 		using var loggerFactory = new SerilogLoggerFactory();
 		var repoParser = new KeycloakRepositoryParser(loggerFactory.CreateLogger<KeycloakRepositoryParser>(), options.KeycloakRoot);
 		var apiDefinition = repoParser.Parse();
@@ -37,13 +41,11 @@ try
 		Log.Information("Generating OpenApi definition");
 		var openApiDocument = new KeycloakOpenApiGenerator().Generate(postProcessed.ActionCollections, postProcessed.Representations);
 
-		var definitionsYmlPath = Path.Combine(Directory.GetCurrentDirectory(), "definition.yml");
 		Log.Information($"Writing: {definitionsYmlPath}");
 		using (var targetFile = File.Open(definitionsYmlPath, FileMode.Create))
 		{
 			openApiDocument.SerializeAsYaml(targetFile, OpenApiSpecVersion.OpenApi3_0);
 		}
-		var definitionsJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "definition.json");
 		Log.Information($"Writing: {definitionsJsonPath}");
 		using (var targetFile = File.Open(definitionsJsonPath, FileMode.Create))
 		{

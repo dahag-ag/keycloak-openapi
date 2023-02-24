@@ -80,6 +80,7 @@ public class KeycloakOpenApiGenerator
 
 		foreach (var pathGroup in groupedByPath)
 		{
+			
 			var pathItem = CreateOpenApoCreateOpenApiPathItem(pathGroup.ToList());
 			paths.Add(pathGroup.Key, pathItem);
 		}

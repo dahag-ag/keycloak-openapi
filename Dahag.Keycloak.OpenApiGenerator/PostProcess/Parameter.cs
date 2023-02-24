@@ -21,12 +21,14 @@ public class Parameter : IParameter
 	public string Name { get; }
 	public string? Default { get; set; }
 	public TypeInfo TypeInfo { get; }
+	public bool Implicit { get; }
 
-	public Parameter(ParamSource source, string name, TypeInfo typeInfo)
+	public Parameter(ParamSource source, string name, TypeInfo typeInfo, bool @implicit)
 	{
 		Source = source;
 		Name = name;
 		TypeInfo = typeInfo;
+		Implicit = @implicit;
 	}
 
 	public static IParameter Create(RawRxjsParam raw, RawDocumentation? rawDocumentation, List<IRepresentation> representations, List<KeycloakEnum> enums)
@@ -45,10 +47,10 @@ public class Parameter : IParameter
 		if (typeInfo == null)
 			throw new Exception($"Could not find type for {raw.Type}");
 		
-		return new Parameter(raw.ParamSource!.Value, raw.PathParam ?? raw.Name, typeInfo)
+		return new Parameter(raw.ParamSource!.Value, raw.PathParam ?? raw.Name, typeInfo, raw.Implicit)
 		{
 			Default = raw.Default,
-			Documentation = rawDocumentation?.ParamText.GetValueOrDefault(raw.Name)
+			Documentation = rawDocumentation?.ParamText.GetValueOrDefault(raw.Name),
 		};
 	}
 }

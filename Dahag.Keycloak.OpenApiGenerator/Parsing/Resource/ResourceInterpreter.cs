@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
 namespace Dahag.Keycloak.OpenApiGenerator.Parsing.Resource;
@@ -96,14 +97,26 @@ public class ResourceInterpreter : JavaParserBaseVisitor<RawRxJsResource>
 		_skipChildren = true;
 		if (CurrentPending != null)
 		{
-			CurrentPending.PersistedAtLine = context.Start.Line;
-			_resource.Actions.Add(CurrentPending);
-			CurrentPending = null;
+			FinalizeCurrentPending(context);
 		}
 		
 		var result = base.VisitMethodBody(context);
 		_skipChildren = false;
 		return result;
+	}
+
+	private void FinalizeCurrentPending(ParserRuleContext context)
+	{
+		CurrentPending!.PersistedAtLine = context.Start.Line;
+		CurrentPending.RawMethodBody = context.GetText();
+		_resource.Actions.Add(CurrentPending);
+
+		if (CurrentPending.CouldMaybeHaveAnImplicitBodyParameter())
+		{
+			CurrentPending.AddImplicitBodyParameter();
+		}
+
+		CurrentPending = null;
 	}
 
 	public override RawRxJsResource VisitCompilationUnit(JavaParser.CompilationUnitContext context)

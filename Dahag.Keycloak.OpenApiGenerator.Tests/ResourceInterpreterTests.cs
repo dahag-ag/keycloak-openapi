@@ -188,6 +188,27 @@ public class Tests
 			}
 		});
 	}
+	
+		
+	[Test]
+	public void Interpret_ImplicitBodyParams_Works()
+	{
+		var actual = ParseResource("ImplicitParamsResource.java");
+
+		Assert.That(actual.Actions, Has.Count.EqualTo(1));
+		actual.Actions[0].Parameters.AssertEquality(new List<RawRxjsParam>
+		{
+			new()
+			{
+				Name = "data",
+				ParamSource = ParamSource.Body,
+				Type = "Object",
+				PathParam = null,
+				Default = null,
+				Implicit = true
+			}
+		});
+	}
 
 
 	[Test]

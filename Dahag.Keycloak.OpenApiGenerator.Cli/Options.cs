@@ -9,4 +9,7 @@ public class Options
 	
 	[Value(1, Required = false)]
 	public string? Output { get; set; }
+	
+	[Value(2, Required = false)]
+	public string? OutputFileName { get; set; }
 }
