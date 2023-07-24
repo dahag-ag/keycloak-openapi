@@ -156,7 +156,7 @@ public class ClientResource {
     @GET
     @NoCache
     @Path("installation/providers/{providerId}")
-    public Response getInstallationProvider(@PathParam("providerId") String providerId, @QueryParam("first") Integer firstResult, @FormParam("action") String action) {
+    public Response getInstallationProvider(@Parameter(description = "Provider id") @PathParam("providerId") String providerId, @QueryParam("first") Integer firstResult, @FormParam("action") String action) {
         auth.clients().requireView(client);
 
         ClientInstallationProvider provider = session.getProvider(ClientInstallationProvider.class, providerId);

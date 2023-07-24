@@ -276,6 +276,12 @@ public class Tests
 
 		actual.Actions.AssertEquality(expected.Actions);
 	}
+	
+	[Test]
+	public void Interpret_OpenApiAnnotations_DoesNotCrash()
+	{
+		ParseResource("ResourceWithOpenApiAnnotations.java");
+	}
 
 	private static RawRxJsResource ParseResource(string testFileName)
 	{

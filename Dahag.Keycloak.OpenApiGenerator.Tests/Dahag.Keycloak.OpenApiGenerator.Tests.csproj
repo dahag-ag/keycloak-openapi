@@ -29,6 +29,7 @@
 	  <EmbeddedResource Include="TestFiles\RepresentationWithIgnored.java" />
 	  <EmbeddedResource Include="TestFiles\RepresentationWithNestedType.java" />
 	  <EmbeddedResource Include="TestFiles\ResourceWithInlineClassCreationAndMethods.java" />
+	  <EmbeddedResource Include="TestFiles\ResourceWithOpenApiAnnotations.java" />
 	  <EmbeddedResource Include="TestFiles\ResourceWithoutInlineClassCreationAndMethods.java" />
 	  <EmbeddedResource Include="TestFiles\SimpleParamsResource.java" />
 	  <EmbeddedResource Include="TestFiles\SimpleRepresentation.java" />

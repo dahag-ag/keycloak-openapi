@@ -63,6 +63,9 @@ public class ParameterInterpreter : JavaParserBaseVisitor<List<RawRxjsParam>>
 
 		var qualifiedName = context.qualifiedName().GetText();
 
+		if (IsSkippedAnnotation(qualifiedName))
+			return base.VisitAnnotation(context);
+		
 		if (ShouldCompletelyIgnoreParam(qualifiedName))
 		{
 			_current.InternalJavaJankToIgnore = true;
@@ -75,7 +78,7 @@ public class ParameterInterpreter : JavaParserBaseVisitor<List<RawRxjsParam>>
 		if (TryHandleAsParamPlacementInfo(qualifiedName, context))
 			return base.VisitAnnotation(context);
 
-		throw new ArgumentOutOfRangeException(nameof(qualifiedName), qualifiedName, "This is not a recognized parameter annotation");
+		throw new ArgumentOutOfRangeException(nameof(qualifiedName), qualifiedName, $"This is not a recognized parameter annotation ({context.Start.Line})");
 	}
 
 	private static bool ShouldCompletelyIgnoreParam(string qualifiedName)
@@ -83,6 +86,18 @@ public class ParameterInterpreter : JavaParserBaseVisitor<List<RawRxjsParam>>
 		return qualifiedName switch
 		{
 			"Context" => true,
+			_ => false
+		};
+	}
+	
+	private static bool IsSkippedAnnotation(string qualifiedName)
+	{
+		return qualifiedName switch
+		{
+			"Tag" => true,
+			"Operation" => true,
+			"Parameter" => true,
+			"Deprecated" => true,
 			_ => false
 		};
 	}
