@@ -12236,13 +12236,19 @@
           "config": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "subComponents": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/components/schemas/ComponentExportRepresentation"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ComponentExportRepresentation"
+              }
             }
           }
         }
@@ -12271,7 +12277,10 @@
           "config": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -12371,7 +12380,10 @@
           "config": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -15283,7 +15295,10 @@
           "components": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/components/schemas/ComponentExportRepresentation"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ComponentExportRepresentation"
+              }
             }
           },
           "attributes": {
@@ -15314,17 +15329,17 @@
           },
           "decisionStrategy": {
             "enum": [
-              "AFFIRMATIVE(0)",
-              "UNANIMOUS(1)",
-              "CONSENSUS(2)"
+              "AFFIRMATIVE",
+              "UNANIMOUS",
+              "CONSENSUS"
             ],
             "type": "string",
             "description": "DecisionStrategy"
           },
           "logic": {
             "enum": [
-              "POSITIVE(0)",
-              "NEGATIVE(1)"
+              "POSITIVE",
+              "NEGATIVE"
             ],
             "type": "string",
             "description": "Logic"
@@ -15434,9 +15449,9 @@
           },
           "policyEnforcementMode": {
             "enum": [
-              "ENFORCING(0)",
-              "PERMISSIVE(1)",
-              "DISABLED(2)"
+              "ENFORCING",
+              "PERMISSIVE",
+              "DISABLED"
             ],
             "type": "string",
             "description": "PolicyEnforcementMode"
@@ -15461,9 +15476,9 @@
           },
           "decisionStrategy": {
             "enum": [
-              "AFFIRMATIVE(0)",
-              "UNANIMOUS(1)",
-              "CONSENSUS(2)"
+              "AFFIRMATIVE",
+              "UNANIMOUS",
+              "CONSENSUS"
             ],
             "type": "string",
             "description": "DecisionStrategy"
