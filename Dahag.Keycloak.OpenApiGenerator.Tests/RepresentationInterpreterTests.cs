@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Antlr4.Runtime;
-using Dahag.Keycloak.OpenApiGenerator.Parsing;
 using Dahag.Keycloak.OpenApiGenerator.Parsing.Representation;
 using NUnit.Framework;
 
@@ -17,7 +14,7 @@ public class RepresentationInterpreterTests
 	}
 
 	[Test]
-	public void Interpret_SimpleRepresentation_Works()
+	public void Interpret_Simple_Works()
 	{
 		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.SimpleRepresentation.java");
 		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
@@ -57,7 +54,7 @@ public class RepresentationInterpreterTests
 	}
 	
 	[Test]
-	public void Interpret_NestedRepresentation_Works()
+	public void Interpret_WithNestedRepresentation_Works()
 	{
 		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.RepresentationWithNestedType.java");
 		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
@@ -80,6 +77,25 @@ public class RepresentationInterpreterTests
 		Assert.That(actual[1].Properties[0].Type, Is.EqualTo("String"));
 		Assert.That(actual[1].Properties[1].Name, Is.EqualTo("EnabledNested"));
 		Assert.That(actual[1].Properties[1].Type, Is.EqualTo("Boolean"));
+	}
+
+	[Test]
+	public void Interpret_WithMultiValueMap_Works()
+	{
+		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.RepresentationWithMultiValue.java");
+		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
+		var parser = CreateJavaParser(textReader);
+
+		var interpreter = new RepresentationInterpreter();
+		var actuals = interpreter.Visit(parser.compilationUnit());
+		Assert.That(actuals, Has.Count.EqualTo(1));
+		var actual = actuals[0];
+
+		Assert.That(actual, Is.Not.Null);
+		Assert.That(actual.Name, Is.EqualTo("ClientRepresentation"));
+		Assert.That(actual.Properties, Has.Count.EqualTo(1));
+		Assert.That(actual.Properties[0].Name, Is.EqualTo("Config"));
+		Assert.That(actual.Properties[0].Type, Is.EqualTo("MultivaluedHashMap<String,String>"));
 	}
 
 

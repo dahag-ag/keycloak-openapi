@@ -21,6 +21,7 @@
 	<ItemGroup>
 	  <EmbeddedResource Include="TestFiles\AdvancedParamsResource.java" />
 	  <EmbeddedResource Include="TestFiles\ChildResource.java" />
+	  <EmbeddedResource Include="TestFiles\RepresentationWithMultiValue.java" />
 	  <EmbeddedResource Include="TestFiles\DifferentConsumeAndProduceTypesEndpointsResource.java" />
 	  <EmbeddedResource Include="TestFiles\DocumentedResource.java" />
 	  <EmbeddedResource Include="TestFiles\EnumStableIndex.java" />
