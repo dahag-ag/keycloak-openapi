@@ -86,7 +86,7 @@ public class RepresentationInterpreterTests
 	[Test]
 	public void Interpret_Enum_Works()
 	{
-		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.Logic.java");
+		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.Enum.java");
 		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
 		var parser = CreateJavaParser(textReader);
 
@@ -99,6 +99,22 @@ public class RepresentationInterpreterTests
 		Assert.That(actual.Map[1], Is.EqualTo("NEGATIVE"));
 	}
 
+	[Test]
+	public void Interpret_EnumWithStableIndex_Works()
+	{
+		using var manifestResourceStream = typeof(Tests).Assembly.GetManifestResourceStream($"Dahag.Keycloak.OpenApiGenerator.Tests.TestFiles.EnumStableIndex.java");
+		using var textReader = new StreamReader(manifestResourceStream!, Encoding.UTF8);
+		var parser = CreateJavaParser(textReader);
+
+		var interpreter = new EnumInterpreter();
+		var actual = interpreter.Visit(parser.compilationUnit());
+		Assert.That(actual, Is.Not.Null);
+		Assert.That(actual.Map, Has.Count.EqualTo(3));
+
+		Assert.That(actual.Map[0], Is.EqualTo("ENFORCING"));
+		Assert.That(actual.Map[1], Is.EqualTo("PERMISSIVE"));
+		Assert.That(actual.Map[2], Is.EqualTo("DISABLED"));
+	}
 	
 	public static JavaParser CreateJavaParser(TextReader input)
 	{
