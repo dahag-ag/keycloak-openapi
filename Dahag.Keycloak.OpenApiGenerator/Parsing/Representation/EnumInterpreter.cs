@@ -1,5 +1,4 @@
-﻿using Dahag.Keycloak.OpenApiGenerator.Parsing.Resource;
-using Dahag.Keycloak.OpenApiGenerator.PostProcess;
+﻿using Dahag.Keycloak.OpenApiGenerator.PostProcess;
 
 namespace Dahag.Keycloak.OpenApiGenerator.Parsing.Representation;
 
@@ -23,7 +22,16 @@ public class EnumInterpreter : JavaParserBaseVisitor<KeycloakEnum?>
 
 	public override KeycloakEnum? VisitEnumConstant(JavaParser.EnumConstantContext context)
 	{
-		_enum!.Map.Add(_counter, context.GetText());
+		var staticIndexEnum = !(context.arguments()?.IsEmpty ?? true);
+		var enumIdentifier = context.identifier().GetText();
+		if (staticIndexEnum)
+		{
+			_enum!.Map.Add(int.Parse(context.arguments().expressionList().GetText()), enumIdentifier);
+		}
+		else
+		{
+			_enum!.Map.Add(_counter, enumIdentifier);
+		}
 		_counter++;
 		return base.VisitEnumConstant(context);
 	}

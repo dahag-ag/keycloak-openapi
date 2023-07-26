@@ -254,7 +254,8 @@ public static class OpenApiHelperExtensions
 		return collection.Type switch
 		{
 			CollectionType.List or CollectionType.Stream or CollectionType.Array or CollectionType.Set => ("array", null, collection.First.ToOpenApiSchema()),
-			CollectionType.Map or CollectionType.MultivaluedHashMap => ("object", collection.Second!.ToOpenApiSchema(), null),
+			CollectionType.Map => ("object", collection.Second!.ToOpenApiSchema(), null),
+			CollectionType.MultivaluedHashMap => ("object", new TypeInfo(new Collection(CollectionType.List, collection.Second!)).ToOpenApiSchema(), null),
 			_ => throw new ArgumentOutOfRangeException()
 		};
 	}

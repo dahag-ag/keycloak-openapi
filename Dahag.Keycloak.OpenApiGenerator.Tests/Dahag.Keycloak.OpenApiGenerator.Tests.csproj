@@ -21,8 +21,10 @@
 	<ItemGroup>
 	  <EmbeddedResource Include="TestFiles\AdvancedParamsResource.java" />
 	  <EmbeddedResource Include="TestFiles\ChildResource.java" />
+	  <EmbeddedResource Include="TestFiles\RepresentationWithMultiValue.java" />
 	  <EmbeddedResource Include="TestFiles\DifferentConsumeAndProduceTypesEndpointsResource.java" />
 	  <EmbeddedResource Include="TestFiles\DocumentedResource.java" />
+	  <EmbeddedResource Include="TestFiles\EnumStableIndex.java" />
 	  <EmbeddedResource Include="TestFiles\ImplicitParamsResource.java" />
 	  <EmbeddedResource Include="TestFiles\ImplicitPathResource.java" />
 	  <EmbeddedResource Include="TestFiles\ParentResource.java" />
@@ -36,18 +38,12 @@
 	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResource.java" />
 	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResourceShuffledAttributes.java" />
 	  <EmbeddedResource Include="TestFiles\TwoSimpleEndpointsResourceWithRandomPrivateMethods.java" />
-	  <None Remove="TestFiles\ClientsResource.java" />
 	  <EmbeddedResource Include="TestFiles\ClientsResource.java" />
-	  <None Remove="TestFiles\ClientResource.java" />
 	  <EmbeddedResource Include="TestFiles\ClientResource.java" />
-	  <None Remove="TestFiles\ClientRepresentation.java" />
 	  <EmbeddedResource Include="TestFiles\ClientRepresentation.java" />
-	  <None Remove="TestFiles\Logic.java" />
-	  <EmbeddedResource Include="TestFiles\Logic.java" />
-	  <None Remove="TestFiles\ResourceWithInlineClassCreation.java" />
 	  <EmbeddedResource Include="TestFiles\ResourceWithInlineClassCreation.java" />
-	  <None Remove="TestFiles\ResourceWithoutInlineClassCreation.java" />
 	  <EmbeddedResource Include="TestFiles\ResourceWithoutInlineClassCreation.java" />
+	  <EmbeddedResource Include="TestFiles\Enum.java" />
 	</ItemGroup>
 
 </Project>
